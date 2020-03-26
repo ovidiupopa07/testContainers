@@ -26,7 +26,8 @@ jobs:
   mvn-build-test:
 
     runs-on: ubuntu-latest
-    name: test java 11 projects
+    name: build and test java 11 
+    needs: mvn-compile
 
     steps:
       - uses: actions/checkout@v2
@@ -42,8 +43,3 @@ jobs:
           java-version: 11
       - name: Build and test project
         run: mvn clean verify --file pom.xml
-      - name: Upload Maven build artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: artifact
-          path: test-containers-project/test-containers-cassandra/target/github-actions-java-maven.jar
