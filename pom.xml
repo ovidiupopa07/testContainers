@@ -21,6 +21,7 @@
 
     <modules>
         <module>test-containers-cassandra</module>
+        <module>test-containers-mysql</module>
     </modules>
 
 
