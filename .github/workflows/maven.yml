@@ -43,8 +43,3 @@ jobs:
           java-version: 11
       - name: Build and test project
         run: mvn clean verify --file pom.xml
-      - name: Upload Maven build artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: artifact
-          path: testContainers/test-containers-cassandra/target/github-actions-java-maven.jar
