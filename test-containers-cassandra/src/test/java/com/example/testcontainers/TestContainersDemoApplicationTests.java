@@ -51,7 +51,9 @@ class TestContainersDemoApplicationTests {
 	@Test
 	void getNextCar() {
 		final Flux<Car> carFlux = testClassRepository.findAll();
-		StepVerifier.create(carFlux).expectNextCount(1).assertNext(car ->{
+
+
+		StepVerifier.create(carFlux).assertNext(car ->{
 			assertEquals("VW", car.getCarPrimaryKey().getBrand());
 			assertEquals("Tiguan", car.getModel());
 			assertEquals(200,car.getHorsePower());
