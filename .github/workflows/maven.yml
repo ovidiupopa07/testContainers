@@ -47,4 +47,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: artifact
-          path: test-containers-project/test-containers-cassandra/target/github-actions-java-maven.jar
+          path: testContainers/test-containers-cassandra/target/github-actions-java-maven.jar
