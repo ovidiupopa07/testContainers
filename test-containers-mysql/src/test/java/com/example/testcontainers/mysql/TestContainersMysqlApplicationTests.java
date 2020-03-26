@@ -25,8 +25,7 @@ class TestContainersMysqlApplicationTests {
 
     @Container
     private static final MySQLContainer mySQLContainer = (MySQLContainer) new MySQLContainer("mysql:latest")
-            .withDatabaseName("car").withUsername("sa").withPassword("sa").withInitScript("init.sql");
-
+            .withDatabaseName("integration-test-db").withUsername("sa").withPassword("sa").withInitScript("init.sql");
 
     @Autowired
     private CarRepository carRepository;

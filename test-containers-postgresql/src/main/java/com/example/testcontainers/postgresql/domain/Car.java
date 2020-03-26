@@ -1,4 +1,4 @@
-package com.example.testcontainers.mysql.domain;
+package com.example.testcontainers.postgresql.domain;
 
 import lombok.Data;
 
