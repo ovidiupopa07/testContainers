@@ -16,6 +16,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import com.example.testcontainers.domain.Car;
 import com.example.testcontainers.repository.CarRepository;
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @SpringBootTest
@@ -45,14 +49,13 @@ class TestContainersDemoApplicationTests {
 	}
 
 	@Test
-	void contextLoads() {
-		testClassRepository.findAll().doOnNext(new Consumer<Car>() {
-
-			@Override
-			public void accept(Car t) {
-				System.out.println(t.getCarPrimaryKey().getBrand()+ " " +t.getModel());
-			}
-		}).subscribe();
+	void getNextCar() {
+		final Flux<Car> carFlux = testClassRepository.findAll();
+		StepVerifier.create(carFlux).expectNextCount(1).assertNext(car ->{
+			assertEquals("VW", car.getCarPrimaryKey().getBrand());
+			assertEquals("Tiguan", car.getModel());
+			assertEquals(200,car.getHorsePower());
+		}).verifyComplete();
 	}
 
 }
