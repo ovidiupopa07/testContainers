@@ -7,39 +7,32 @@
         <artifactId>test-container-projects</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>test-containers-cassandra</artifactId>
+    <artifactId>test-containers-mysql</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>test-containers-cassandra</name>
-    <description>Demo project for Test Containers</description>
+    <name>test-containers-mysql</name>
+    <description>Demo projectusin test containers with mysql</description>
+
 
     <dependencies>
 
+        <!-- https://mvnrepository.com/artifact/org.testcontainers/mysql -->
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>cassandra</artifactId>
+            <artifactId>mysql</artifactId>
             <version>1.13.0</version>
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-cassandra-reactive</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-            <scope>test</scope>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
