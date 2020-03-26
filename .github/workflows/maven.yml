@@ -26,7 +26,8 @@ jobs:
   mvn-build-test:
 
     runs-on: ubuntu-latest
-    name: test java 11 projects
+    name: build and test java 11 
+    needs: mvn-compile
 
     steps:
       - uses: actions/checkout@v2
