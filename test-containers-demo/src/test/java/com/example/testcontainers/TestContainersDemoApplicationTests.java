@@ -14,8 +14,8 @@ import org.testcontainers.containers.CassandraContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import com.example.testcontainers.domain.TestClass;
-import com.example.testcontainers.repository.TestClassRepository;
+import com.example.testcontainers.domain.Car;
+import com.example.testcontainers.repository.CarRepository;
 
 @Testcontainers
 @SpringBootTest
@@ -28,7 +28,7 @@ class TestContainersDemoApplicationTests {
 			.withInitScript("insert.cql");
 
 	@Autowired
-	TestClassRepository testClassRepository;
+	CarRepository testClassRepository;
 
 	static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
@@ -46,11 +46,11 @@ class TestContainersDemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-		testClassRepository.findAll().doOnNext(new Consumer<TestClass>() {
+		testClassRepository.findAll().doOnNext(new Consumer<Car>() {
 
 			@Override
-			public void accept(TestClass t) {
-				System.out.println(t.getLastName());
+			public void accept(Car t) {
+				System.out.println(t.getCarPrimaryKey().getBrand()+ " " +t.getModel());
 			}
 		}).subscribe();
 	}

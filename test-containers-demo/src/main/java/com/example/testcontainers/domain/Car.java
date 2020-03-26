@@ -11,13 +11,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("test_table")
-public class TestClass {
+@Table("car")
+public class Car {
 	
 	@PrimaryKey
-	private TestClassPrimaryKey testClassPrimaryKey;
+	private CarPrimaryKey carPrimaryKey;
 	
-	@Column("last_name")
-	private String lastName;
+	@Column("model")
+	private String model;
+	
+	@Column("horse_power")
+	private Integer horsePower;
+	
+	@Column("fuel")
+	private String fuel;
+	
+	@Column("torque")
+	private String torque;
 
 }

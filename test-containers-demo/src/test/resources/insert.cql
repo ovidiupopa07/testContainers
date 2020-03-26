@@ -8,14 +8,17 @@ WITH REPLICATION = {
 
 use test;
 
-DROP TABLE IF EXISTS test_table;
+DROP TABLE IF EXISTS car;
 
-CREATE TABLE IF NOT EXISTS test_table (
-	name text, /*PK*/
+CREATE TABLE IF NOT EXISTS car (
+	brand text, /*PK*/
 	uuid TimeUUID,
-    last_name text,
+    model text,
+    horse_power int,
+    fuel text,
+    torque text,
 
-	PRIMARY KEY (name, uuid));
+	PRIMARY KEY (brand, uuid));
 	
 	
-INSERT INTO test_table(name,uuid,last_name) VALUES ('FIRSTNAME', now(), 'lastname');
+INSERT INTO car(brand,uuid,model,horse_power,fuel,torque) VALUES ('VW', now(), 'Tiguan',200,'Petrol','300Nm');

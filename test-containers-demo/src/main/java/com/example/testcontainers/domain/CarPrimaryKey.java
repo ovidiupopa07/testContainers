@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @PrimaryKeyClass
-public class TestClassPrimaryKey {
+public class CarPrimaryKey {
 
-	@PrimaryKeyColumn(name = "name", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String name;
+	@PrimaryKeyColumn(name = "brand", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
+    private String brand;
     @PrimaryKeyColumn(name = "uuid", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
     private UUID uuid = UUIDs.timeBased();
 }
