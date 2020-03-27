@@ -1,7 +1,9 @@
 package com.example.testcontainers.postgresql.repository;
 
 import com.example.testcontainers.postgresql.domain.Car;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CarRepository extends JpaRepository<Car, Integer> {
+@Repository
+public interface CarRepository extends ReactiveCrudRepository<Car, Integer> {
 }

@@ -9,15 +9,13 @@ import org.springframework.boot.test.util.TestPropertyValues;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @Testcontainers
 @ContextConfiguration(initializers = TestContainersPostgresqlApplicationTests.Initializer.class)
@@ -28,36 +26,37 @@ class TestContainersPostgresqlApplicationTests {
     static PostgreSQLContainer postgreSQLContainer = (PostgreSQLContainer) new PostgreSQLContainer("postgres:latest")
             .withDatabaseName("integration-test-db")
             .withUsername("sa")
-            .withPassword("sa");
+            .withPassword("sa")
+            .withInitScript("init.sql");
 
     @Autowired
     private CarRepository carRepository;
 
 
     @Test
-    @Sql({"/init.sql"})
     void getCarsFromPostgreSql() {
 
 
-        final List<Car> allCars = carRepository.findAll();
-        assertFalse(allCars.isEmpty());
-        assertEquals(1, allCars.size());
-
-        final Car car = allCars.get(0);
-
-        assertEquals("VW", car.getBrand());
-        assertEquals("Tiguan", car.getModel());
-        assertEquals(200, car.getHorsePower());
+        final Flux<Car> allCars = carRepository.findAll();
+        StepVerifier.create(allCars).assertNext(nextCar -> {
+            assertEquals("VW", nextCar.getBrand());
+            assertEquals("Tiguan", nextCar.getModel());
+            assertEquals(200, nextCar.getHorsePower());
+        }).verifyComplete();
     }
 
     static class Initializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
         @Override
         public void initialize(ConfigurableApplicationContext configurableApplicationContext) {
+
             TestPropertyValues
                     .of(
-                            "spring.datasource.url=" + postgreSQLContainer.getJdbcUrl(),
-                            "spring.datasource.driver-class-name=" + postgreSQLContainer.getDriverClassName())
+                            "spring.datasource.host=localhost",
+                            "spring.datasource.port=" + postgreSQLContainer.getFirstMappedPort(),
+                            "spring.datasource.database=" + postgreSQLContainer.getDatabaseName(),
+                            "spring.datasource.username=" + postgreSQLContainer.getUsername(),
+                            "spring.datasource.password=" + postgreSQLContainer.getPassword())
                     .applyTo(configurableApplicationContext.getEnvironment());
         }
     }
