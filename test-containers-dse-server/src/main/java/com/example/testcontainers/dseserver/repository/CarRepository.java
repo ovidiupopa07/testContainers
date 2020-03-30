@@ -11,6 +11,6 @@ import reactor.core.publisher.Flux;
 public interface CarRepository extends ReactiveCassandraRepository<Car, CarPrimaryKey> {
 
 
-    @Query
+    @Query("SELECT * FROM car WHERE solr_query=?0")
     Flux<Car> findBySolrQuery(String solrQuery);
 }
