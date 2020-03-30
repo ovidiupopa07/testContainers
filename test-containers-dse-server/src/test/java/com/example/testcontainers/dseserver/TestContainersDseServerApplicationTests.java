@@ -15,6 +15,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
 
+import java.time.Duration;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
@@ -24,7 +26,7 @@ class TestContainersDseServerApplicationTests {
 
     @Container
     private static final DseServerContainer dseCassandraContainer = new DseServerContainer<>("5.1.10")
-            .withInitScript("insert.cql");
+            .withInitScript("insert.cql").withStartupTimeout(Duration.ofMillis(500000));
 
     @Autowired
     CarRepository testClassRepository;

@@ -30,8 +30,10 @@ public class DseServerContainer<SELF extends DseServerContainer<SELF>> extends G
     public DseServerContainer(String dseCassandraVersion) {
         super(IMAGE + ":" + dseCassandraVersion);
         addEnv("DS_LICENSE", "accept");
+        setCommand("-s");
         addExposedPort(CQL_PORT);
         setStartupAttempts(3);
+
         this.enableJmxReporting = false;
     }
 
