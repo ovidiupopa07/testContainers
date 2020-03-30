@@ -48,9 +48,7 @@ class TestContainersDseServerApplicationTests {
 
     @Test
     void getNextCar() {
-        final Flux<Car> carFlux = testClassRepository.findBySolrQuery("'{\"q\":\"*:*\", \"fq\":\"model:Tiguan\"}'");
-
-
+        final Flux<Car> carFlux = testClassRepository.findBySolrQuery("{\"q\":\"*:*\",\"fq\" : \"model:(*Tiguan*)\",\"paging\" : \"driver\"}");
         StepVerifier.create(carFlux).assertNext(car -> {
             assertEquals("VW", car.getCarPrimaryKey().getBrand());
             assertEquals("Tiguan", car.getModel());
