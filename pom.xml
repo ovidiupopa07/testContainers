@@ -23,6 +23,8 @@
         <module>test-containers-cassandra</module>
         <module>test-containers-mysql</module>
         <module>test-containers-postgresql</module>
+        <module>test-containers-dse-cassandra</module>
+        <module>test-containers-dse-server</module>
     </modules>
 
 

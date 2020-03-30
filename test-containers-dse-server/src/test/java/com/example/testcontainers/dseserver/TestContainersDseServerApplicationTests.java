@@ -1,8 +1,8 @@
-package com.example.testcontainers.dse.cassandra;
+package com.example.testcontainers.dseserver;
 
-import com.example.testcontainers.dse.cassandra.domain.Car;
-import com.example.testcontainers.dse.cassandra.dse.DseCassandraContainer;
-import com.example.testcontainers.dse.cassandra.repository.CarRepository;
+import com.example.testcontainers.dseserver.domain.Car;
+import com.example.testcontainers.dseserver.dse.DseServerContainer;
+import com.example.testcontainers.dseserver.repository.CarRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,12 +18,12 @@ import reactor.test.StepVerifier;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
-@ContextConfiguration(initializers = TestContainersDseCassandraApplicationTests.Initializer.class)
+@ContextConfiguration(initializers = TestContainersDseServerApplicationTests.Initializer.class)
 @SpringBootTest
-class TestContainersDseCassandraApplicationTests {
+class TestContainersDseServerApplicationTests {
 
     @Container
-    private static final DseCassandraContainer dseCassandraContainer = new DseCassandraContainer<>("4.0")
+    private static final DseServerContainer dseCassandraContainer = new DseServerContainer<>("5.1.10")
             .withInitScript("insert.cql");
 
     @Autowired
@@ -46,7 +46,7 @@ class TestContainersDseCassandraApplicationTests {
 
     @Test
     void getNextCar() {
-        final Flux<Car> carFlux = testClassRepository.findAll();
+        final Flux<Car> carFlux = testClassRepository.findBySolrQuery("'{\"q\":\"*:*\", \"fq\":\"model:Tiguan\"}'");
 
 
         StepVerifier.create(carFlux).assertNext(car -> {

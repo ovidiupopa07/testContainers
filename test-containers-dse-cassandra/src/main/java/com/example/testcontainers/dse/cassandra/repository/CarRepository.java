@@ -1,4 +1,4 @@
-package com.example.testcontainers.dse.cassandra;
+package com.example.testcontainers.dse.cassandra.repository;
 
 import com.example.testcontainers.dse.cassandra.domain.Car;
 import com.example.testcontainers.dse.cassandra.domain.CarPrimaryKey;

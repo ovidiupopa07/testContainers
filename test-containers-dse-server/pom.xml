@@ -7,16 +7,17 @@
         <artifactId>test-container-projects</artifactId>
         <version>1.0.0</version>
     </parent>
-    <artifactId>test-containers-dse-cassandra</artifactId>
+    <artifactId>test-containers-dse-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>test-containers-dse-cassandra</name>
-    <description>Test container DSE Cassandra</description>
+    <name>test-containers-dse-server</name>
+    <description>Demo project for DataStax Server Test Containers</description>
 
     <properties>
         <java.version>11</java.version>
     </properties>
 
     <dependencies>
+
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers -->
         <dependency>
@@ -32,8 +33,6 @@
             <artifactId>database-commons</artifactId>
             <version>1.13.0</version>
         </dependency>
-
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-cassandra-reactive</artifactId>
@@ -43,6 +42,11 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
